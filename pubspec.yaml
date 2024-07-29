@@ -30,10 +30,11 @@ environment:
 dependencies:
   cached_network_image: null
   cupertino_icons: null
-  dio: 
+  dio: null
   flutter:
     sdk: flutter
   flutter_bloc: null
+  get_it: 
   meta: null
 
 dev_dependencies:
