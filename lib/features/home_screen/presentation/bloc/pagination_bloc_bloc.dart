@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pagination/features/home_screen/data/repositories/video_list.dart';
+import 'package:pagination/features/home_screen/domain/usecases/video_usecase.dart';
 
 part 'pagination_bloc_event.dart';
 part 'pagination_bloc_state.dart';
@@ -16,10 +17,11 @@ ValueNotifier<bool> hasNoMore = ValueNotifier(false);
 class PaginationBlocBloc
     extends Bloc<PaginationBlocEvent, PaginationBlocState> {
   PaginationBlocBloc() : super(PaginationBlocInitial()) {
+    final allVideos = GetAllVideosUsecase(repository: VideoImplementation());
     on<AddNumbers>((event, emit) async {
       log("firstbloc calling");
 
-      final toAllVideoClass = await fetchSomeVideos();
+      final toAllVideoClass = await allVideos.videoDomainUsecase();
       log(toAllVideoClass.contents.first.video.thumbnails[0].url);
       forWholeVideos.addAll(toAllVideoClass.contents);
       try {
